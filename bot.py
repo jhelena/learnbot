@@ -1,6 +1,5 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-PROXY = {'proxy_url': 'socks5://t3.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}}
+import settings
 
 import logging
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
@@ -9,7 +8,7 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     )
 
 def main():
-    mybot = Updater("987432769:AAHNuceqikO5GVK5Y4dibX7LX3xWZAbdcrs", request_kwargs=PROXY)
+    mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
